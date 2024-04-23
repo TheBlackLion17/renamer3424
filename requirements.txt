@@ -1,11 +1,11 @@
-Pillow
+git+https://github.com/MKN-BOTZ/pyrogram 
+Pillow==10.2.0
 humanize
 hachoir
-pyrogram==2.0.57
-TgCrypto
+tgcrypto==1.2.5
 pymongo==4.0.2
 dnspython
 Flask==2.2.2
 gunicorn==20.1.0
-aiohttp==3.8.1
+aiohttp==3.8.3
     
