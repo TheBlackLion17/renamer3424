@@ -179,4 +179,4 @@ def find_one(id):
         return user.get('suffix', None)              
 
 
-agsbots = Database(Config.DB_URL, Config.DB_NAME)
+agsbots = db["user"] Database(Config.DB_URL, Config.DB_NAME)
