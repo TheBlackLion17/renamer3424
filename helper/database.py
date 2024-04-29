@@ -1,6 +1,7 @@
 import motor.motor_asyncio
 from config import Config
 from .utils import send_log
+agsbots = db["user"]
 
 class Database:
     def total_user():
@@ -179,4 +180,4 @@ def find_one(id):
         return user.get('suffix', None)              
 
 
-agsbots = db["user"] Database(Config.DB_URL, Config.DB_NAME)
+agsbots = Database(Config.DB_URL, Config.DB_NAME)
