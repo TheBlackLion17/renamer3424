@@ -6,7 +6,7 @@ from helper.date import add_date
 from helper.database import uploadlimit, usertype, addpre
 from config import Config
 
-ADMIN = int(os.environ.get("ADMIN", 1484670284))
+ADMIN = int(os.environ.get("ADMIN", "5909932224"))
 log_channel = Config.LOG_CHANNEL
 
 
