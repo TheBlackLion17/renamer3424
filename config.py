@@ -9,9 +9,9 @@ class Config(object):
   TOKEN = os.environ.get("TOKEN", "6041996472:AAECug5QJXvYuKfxf5-nGfC_gUAz_VzZ6OM")
 
   # database config
-    DB_NAME = os.environ.get("DB_NAME","cluster0")     
-    DB_URL  = os.environ.get("DB_URL","mongodb+srv://king:king@cluster0.mgicw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002402008837"))
+  DB_NAME = os.environ.get("DB_NAME","cluster0")     
+  DB_URL  = os.environ.get("DB_URL","mongodb+srv://king:king@cluster0.mgicw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+  LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002402008837"))
 
 class Txt(object):
   PROGRESS_BAR = """\n
