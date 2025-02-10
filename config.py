@@ -2,9 +2,9 @@ import os, time
 
 class Config(object):
   # database config
-    DB_NAME = os.environ.get("DB_NAME","Agsmod")     
-    DB_URL  = os.environ.get("DB_URL","")
-    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", ""))
+    DB_NAME = os.environ.get("DB_NAME","cluster0")     
+    DB_URL  = os.environ.get("DB_URL","mongodb+srv://king:king@cluster0.mgicw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002402008837"))
 
 class Txt(object):
   PROGRESS_BAR = """\n
