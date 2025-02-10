@@ -1,5 +1,5 @@
 from helper.progress import progress_for_pyrogram, TimeFormatter
-
+from config.py import TOKEN,API_ID,API_HASH,STRING,LOG_CHANNEL,ADMIN 
 from pyrogram import Client, filters
 from pyrogram.types import (
     InlineKeyboardButton, InlineKeyboardMarkup, ForceReply)
@@ -16,17 +16,7 @@ from helper.progress import humanbytes
 from helper.set import escape_invalid_curly_brackets
 import os
 
-log_channel = int(os.environ.get("LOG_CHANNEL", ""))
-
-API_ID = int(os.environ.get("API_ID", ""))
-
-API_HASH = os.environ.get("API_HASH", "")
-
-STRING = os.environ.get("STRING", "")
-
-ADMIN = os.environ.get("ADMIN", "")
-
-app = Client("test", api_id=API_ID, api_hash=API_HASH, session_string=STRING)
+app = Client("test", api_id=API_ID, api_hash=API_HASH, session_string=STRING, log_channel=LOG_CHANNEL)
 
 
 @Client.on_callback_query(filters.regex('cancel'))
