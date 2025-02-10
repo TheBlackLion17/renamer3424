@@ -16,15 +16,15 @@ from helper.date import check_expi
 import os
 from config import Config
 
-CHANNEL = os.environ.get('CHANNEL', "")
-STRING = os.environ.get("STRING", "")
-ADMIN = int(os.environ.get("ADMIN", 1484670284))
-bot_username = os.environ.get("BOT_USERNAME","GangsterBaby_renamer_BOT")
+CHANNEL = os.environ.get('CHANNEL', "-1002402008837")
+STRING = os.environ.get("STRING", "BQFVZVkAThwaD5z3Y6BA1qihdkwjNugS00S0Rfcsp5Q6iYIrPv6y8qPcL6d6CkV4T_GEF-4NlFjmo9H8z9aMDsExWvnBL_v9TF6n8F1WthWzD3WqLtwhWjjUMcZuO2nmXe51EwwOI_vxkhYfA_KH1OXmLVYQE3U0uuzze1IVDZvP2mwebpmE-SZA9yceE49RNccpF002dzE3I212Hkn8lwGLyMR9GvD8kQs_lFNi6FGirS0rcPq5IrMzoysaZyv8Lb4illRmJIXbliCU9xQDAE7uV8DuR1mu-kNIaZam5Bs8zq-8hhNM0LZohaWTA9QdQcFwIn_F638PGtq19uxB1JxdZi8XBgAAAAGf1B37AA")
+ADMIN = int(os.environ.get("ADMIN", "5909932224"))
+bot_username = os.environ.get("BOT_USERNAME","AGS_Prime_Renamer_bot")
 log_channel = Config.LOG_CHANNEL,
-token = os.environ.get('TOKEN', '')
+token = os.environ.get('TOKEN', '6041996472:AAECug5QJXvYuKfxf5-nGfC_gUAz_VzZ6OM')
 botid = token.split(':')[0]
 FLOOD = 500
-LAZY_PIC = os.environ.get("LAZY_PIC", "")
+LAZY_PIC = os.environ.get("LAZY_PIC", "https://envs.sh/30.jpg")
 
 
 # Part of Day --------------------
