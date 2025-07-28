@@ -4,6 +4,7 @@ from .utils import send_log
 from pyrogram import Client
 from pyrogram.types import Message
 
+
 class Database:
     def __init__(self, uri: str, database_name: str):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
@@ -17,6 +18,8 @@ class Database:
             "caption": None,
             "prefix": None,
             "suffix": None,
+            "uploadlimit": 2147483648,  # Default 2GB
+            "usertype": "Free"
         }
 
     async def init_indexes(self):
@@ -125,9 +128,24 @@ class Database:
             print(f"Error getting suffix: {e}")
             return None
 
+    # 🔒 Premium Upload Limit
+    async def uploadlimit(self, user_id: int) -> int:
+        user = await self.col.find_one({"_id": user_id})
+        return user.get("uploadlimit", 2147483648)
 
-# Initialize the database connection
+    async def usertype(self, user_id: int) -> str:
+        user = await self.col.find_one({"_id": user_id})
+        return user.get("usertype", "Free")
+
+    async def addpre(self, user_id: int) -> None:
+        await self.col.update_one(
+            {"_id": user_id},
+            {"$set": {"usertype": "Premium", "uploadlimit": 4294967296}}  # 4GB
+        )
+
+
+# Initialize
 agsbots = Database(Config.DB_URL, Config.DB_NAME)
 
-# Run this once during bot startup to ensure indexes
+# Example async startup call:
 # await agsbots.init_indexes()
