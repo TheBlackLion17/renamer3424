@@ -11,6 +11,7 @@ class Config(object):
     DB_URL  = os.environ.get("DB_URL","mongodb+srv://renamer:renamer@cluster0.mng3htq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
  
     # other configs
+    PORT = int(os.environ.get("PORT", "8080"))  # Default port
     BOT_UPTIME  = time.time()
     START_PIC   = os.environ.get("START_PIC", "https://envs.sh/Oq2.jpg")
     ADMIN = int(os.environ.get("ADMIN", "7705748477"))
