@@ -18,9 +18,9 @@ class Bot(Client):
     def __init__(self):
         super().__init__(
             name="renamer",
-            api_id=API_ID,
-            api_hash=API_HASH,
-            bot_token=BOT_TOKEN,
+            api_id=Config.API_ID,
+            api_hash=Config.API_HASH,
+            bot_token=Config.BOT_TOKEN,
             workers=50,
             sleep_threshold=5,
             plugins={"root": "plugins"},
@@ -31,7 +31,7 @@ class Bot(Client):
         me = await self.get_me()
         self.mention = me.mention
         self.username = me.username
-        self.force_channel = FORCE_SUB
+        self.force_channel = Config.FORCE_SUB
 
         # Force Subscription Invite Link
         if self.force_channel:
