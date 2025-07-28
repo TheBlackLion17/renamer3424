@@ -1,17 +1,21 @@
 import logging
 import logging.config
-from pyrogram import Client 
-from config import API_ID, API_HASH, BOT_TOKEN, FORCE_SUB, PORT
+from pyrogram import Client
 from aiohttp import web
+
+from config import API_ID, API_HASH, BOT_TOKEN, FORCE_SUB, PORT
 from plugins.web_support import web_server
 
-logging.config.fileConfig('logging.conf')
-logging.getLogger().setLevel(logging.INFO)
-logging.getLogger("pyrogram").setLevel(logging.ERROR)
+# ─── Logging Configuration ─────────────────────────────────────────────────────
 
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+logging.getLogger("pyrogram").setLevel(logging.WARNING)
+
+# ─── Bot Client Definition ─────────────────────────────────────────────────────
 
 class Bot(Client):
-
     def __init__(self):
         super().__init__(
             name="renamer",
@@ -19,34 +23,41 @@ class Bot(Client):
             api_hash=API_HASH,
             bot_token=BOT_TOKEN,
             workers=50,
-            plugins={"root": "plugins"},
             sleep_threshold=5,
+            plugins={"root": "plugins"},
         )
 
     async def start(self):
-       await super().start()
-       me = await self.get_me()
-       self.mention = me.mention
-       self.username = me.username 
-       self.force_channel = FORCE_SUB
-       if FORCE_SUB:
-         try:
-            link = await self.export_chat_invite_link(FORCE_SUB)                  
-            self.invitelink = link
-         except Exception as e:
-            logging.warning(e)
-            logging.warning("Make Sure Bot admin in force sub channel")             
-            self.force_channel = None
-       app = web.AppRunner(await web_server())
-       await app.setup()
-       bind_address = "0.0.0.0"
-       await web.TCPSite(app, bind_address, PORT).start()
-       logging.info(f"{me.first_name} ✅✅ BOT started successfully ✅✅")
-      
+        await super().start()
+        me = await self.get_me()
+        self.mention = me.mention
+        self.username = me.username
+        self.force_channel = FORCE_SUB
+
+        # Force Subscription Invite Link
+        if self.force_channel:
+            try:
+                invite_link = await self.export_chat_invite_link(self.force_channel)
+                self.invitelink = invite_link
+            except Exception as e:
+                logger.warning("❗ Force Sub Error: %s", e)
+                logger.warning("⚠️ Make sure the bot is admin in FORCE_SUB channel.")
+                self.force_channel = None
+
+        # Start Web Server (for health check / render)
+        app = web.AppRunner(await web_server())
+        await app.setup()
+        await web.TCPSite(app, "0.0.0.0", PORT).start()
+
+        logger.info(f"✅ Bot @{self.username} started successfully!")
 
     async def stop(self, *args):
-      await super().stop()      
-      logging.info("Bot Stopped 🙄")
-        
-bot = Bot()
-bot.run()
+        await super().stop()
+        logger.info("🛑 Bot Stopped")
+
+
+# ─── Entry Point ───────────────────────────────────────────────────────────────
+
+if __name__ == "__main__":
+    bot = Bot()
+    bot.run()
