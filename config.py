@@ -2,23 +2,23 @@ import os, time
 
 class Config(object):
     # pyro client config
-    API_ID    = os.environ.get("API_ID", "22373721")
-    API_HASH  = os.environ.get("API_HASH", "6bf8fcaa229c4948941c501a0a5c027c")
-    BOT_TOKEN = os.environ.get("BOT_TOKEN", "6041996472:AAECug5QJXvYuKfxf5-nGfC_gUAz_VzZ6OM") 
+    API_ID    = os.environ.get("API_ID", "13357171")
+    API_HASH  = os.environ.get("API_HASH", "d39c4324a40a8a6b27a067f8ff2b987e")
+    BOT_TOKEN = os.environ.get("BOT_TOKEN", "8417911153:AAFaqifnJ0kY84_kXXLVNP7H2gwTug42nuc") 
    
     # database config
     DB_NAME = os.environ.get("DB_NAME","cluster0")     
-    DB_URL  = os.environ.get("DB_URL","mongodb+srv://king:king@cluster0.mgicw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+    DB_URL  = os.environ.get("DB_URL","mongodb+srv://renamer:renamer@cluster0.mng3htq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
  
     # other configs
     BOT_UPTIME  = time.time()
     START_PIC   = os.environ.get("START_PIC", "https://envs.sh/Oq2.jpg")
-    ADMIN = int(os.environ.get("ADMIN", "5909932224"))
-    STRING = os.environ.get("STRING", "BQFVZVkAThwaD5z3Y6BA1qihdkwjNugS00S0Rfcsp5Q6iYIrPv6y8qPcL6d6CkV4T_GEF-4NlFjmo9H8z9aMDsExWvnBL_v9TF6n8F1WthWzD3WqLtwhWjjUMcZuO2nmXe51EwwOI_vxkhYfA_KH1OXmLVYQE3U0uuzze1IVDZvP2mwebpmE-SZA9yceE49RNccpF002dzE3I212Hkn8lwGLyMR9GvD8kQs_lFNi6FGirS0rcPq5IrMzoysaZyv8Lb4illRmJIXbliCU9xQDAE7uV8DuR1mu-kNIaZam5Bs8zq-8hhNM0LZohaWTA9QdQcFwIn_F638PGtq19uxB1JxdZi8XBgAAAAGf1B37AA")
+    ADMIN = int(os.environ.get("ADMIN", "7705748477"))
+    STRING = os.environ.get("STRING", "BQDL0HMAVLkOlUmM6IXquXXv7vJCi2arGlnAzwTneIiTBW96Po_VxZjaWYZiqUvzOdE2PtRb-QrNLmjfO3k-AtRxhUtU6PtT-0Wj1eL6L6SFQtQfTykcbtRYmCzRZv41lq_Dll0vvuW2xeSzds9tIgs2XiITLIUnKTVaFleij4idqMnXacwhb2KGBitl8LUux6I-GasN1csNdV48URrYC8bI9R0PmfDqMXzAZomD2rIDkCt1ut54234qpg0LgvEeq-1dsIvwch7cgw_pwlmRXtwOdjb_mh1s4qg8_O__lnYMZD1x4V81SGmzxWVNhFWUODbppHHub_2CcaIBW94EoKK836Wy0AAAAAHLTGP9AA")
 
     # channels logs
     FORCE_SUB   = os.environ.get("FORCE_SUB", "AgsModsOG") 
-    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002402008837")"))
+    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002801544620"))
 
     # wes response configuration     
     WEBHOOK = bool(os.environ.get("WEBHOOK", True))
