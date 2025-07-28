@@ -17,40 +17,37 @@ def escape_invalid_curly_brackets(text: str, valids: List[str]) -> str:
 
     while i < n:
         if text[i] == "{":
-            # Check for double curly brackets `{{`
+            # Handle double curly brackets
             if i + 1 < n and text[i + 1] == "{":
                 new_text.append("{{{{")
                 i += 2
                 continue
 
-            # Check if the curly bracket starts a valid placeholder
-            valid_found = False
+            # Check for valid placeholders
+            match = None
             for valid in valids:
-                placeholder = "{" + valid + "}"
+                placeholder = f"{{{valid}}}"
                 if text.startswith(placeholder, i):
-                    new_text.append(placeholder)
-                    i += len(placeholder)
-                    valid_found = True
+                    match = placeholder
                     break
 
-            # If not a valid placeholder, escape the single curly bracket
-            if not valid_found:
+            if match:
+                new_text.append(match)
+                i += len(match)
+            else:
                 new_text.append("{{")
                 i += 1
 
         elif text[i] == "}":
-            # Check for double curly brackets `}}`
+            # Handle double closing curly brackets
             if i + 1 < n and text[i + 1] == "}":
                 new_text.append("}}}}")
                 i += 2
-                continue
-
-            # Escape the single curly bracket
-            new_text.append("}}")
-            i += 1
+            else:
+                new_text.append("}}")
+                i += 1
 
         else:
-            # Append regular characters
             new_text.append(text[i])
             i += 1
 
