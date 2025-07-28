@@ -2,7 +2,7 @@ import os, time
 
 class Config(object):
     # pyro client config
-    API_ID = int(os.environ.get("API_ID", "13357171")
+    API_ID = int(os.environ.get("API_ID", "13357171"))
     API_HASH  = os.environ.get("API_HASH", "d39c4324a40a8a6b27a067f8ff2b987e")
     BOT_TOKEN = os.environ.get("BOT_TOKEN", "8417911153:AAFaqifnJ0kY84_kXXLVNP7H2gwTug42nuc") 
    
