@@ -66,9 +66,8 @@ async def safe_start():
     except Exception as err:
         logger.error(f"❌ Unexpected Error: {err}")
         raise
-    await idle()
+    await bot.idle()  # updated for pyrogram 2.x
 
-# ─── Entry Point ───────────────────────────────────────────────────────────────
+# ─── Main ────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    from pyrogram.idle import idle
     asyncio.run(safe_start())
