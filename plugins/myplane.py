@@ -8,7 +8,7 @@ from datetime import date as date_
 from helper.progress import humanbytes
 from helper.database import daily as daily_
 from helper.date import check_expi
-from helper.database import Database
+from helper.database import *
 
 @Client.on_message(filters.private & filters.command(["myplan"]))
 async def start(client, message):
