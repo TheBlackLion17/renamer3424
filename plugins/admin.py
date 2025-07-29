@@ -3,7 +3,7 @@ from pyrogram.types import (
 import os
 from pyrogram import Client, filters
 from helper.date import add_date
-from helper.database import uploadlimit, usertype, addpre
+from helper.database import Database
 from config import Config
 
 ADMIN = int(os.environ.get("ADMIN", "5909932224"))
