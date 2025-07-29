@@ -2,7 +2,7 @@ import os
 from pyrogram.errors import FloodWait
 import asyncio
 from pyrogram import Client, filters
-from helper.database import getid, delete
+from helper.database import Database
 import time
 ADMIN = int(os.environ.get("ADMIN", 1484670284))
 
