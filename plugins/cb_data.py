@@ -1,5 +1,5 @@
 from helper.progress import progress_for_pyrogram, TimeFormatter
-from config.py import Config
+from config import Config
 from pyrogram import Client, filters
 from pyrogram.types import (
     InlineKeyboardButton, InlineKeyboardMarkup, ForceReply)
