@@ -11,21 +11,6 @@ class Database:
         self.db = self._client[database_name]
         self.col = self.db["user"]
 
-    def uploadlimit(chat_id, limit):
-    dbcol.update_one({"_id": chat_id}, {"$set": {"uploadlimit": limit}})
-
-
-def addpre(chat_id):
-    date = add_date()
-    dbcol.update_one({"_id": chat_id}, {"$set": {"prexdate": date[0]}})
-
-
-def addpredata(chat_id):
-    dbcol.update_one({"_id": chat_id}, {"$set": {"prexdate": None}})
-
-
-def daily(chat_id, date):
-    dbcol.update_one({"_id": chat_id}, {"$set": {"daily": date}})
 
 
     def new_user(self, user_id: int) -> dict:
@@ -38,6 +23,22 @@ def daily(chat_id, date):
             "uploadlimit": 2147483648,  # Default 2GB
             "usertype": "Free"
         }
+
+    async def uploadlimit(self, user_id: int) -> int:
+        user = await self.col.find_one({"_id": user_id})
+        return user.get("uploadlimit", 2147483648)
+
+    async def usertype(self, user_id: int) -> str:
+        user = await self.col.find_one({"_id": user_id})
+        return user.get("usertype", "Free")
+
+    async def addpre(self, user_id: int) -> None:
+        await self.col.update_one(
+            {"_id": user_id},
+            {"$set": {"usertype": "Premium", "uploadlimit": 4294967296}}  # 4GB
+        )
+
+    
 
     async def init_indexes(self):
         try:
@@ -146,19 +147,7 @@ def daily(chat_id, date):
             return None
 
     # 🔒 Premium Upload Limit
-    async def uploadlimit(self, user_id: int) -> int:
-        user = await self.col.find_one({"_id": user_id})
-        return user.get("uploadlimit", 2147483648)
-
-    async def usertype(self, user_id: int) -> str:
-        user = await self.col.find_one({"_id": user_id})
-        return user.get("usertype", "Free")
-
-    async def addpre(self, user_id: int) -> None:
-        await self.col.update_one(
-            {"_id": user_id},
-            {"$set": {"usertype": "Premium", "uploadlimit": 4294967296}}  # 4GB
-        )
+    
 
 
 # Initialize
