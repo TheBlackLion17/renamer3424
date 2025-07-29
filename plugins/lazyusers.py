@@ -5,7 +5,7 @@ token = os.environ.get('TOKEN','')
 botid = token.split(':')[0]
 ADMIN = int(os.environ.get("ADMIN", ""))
 
-from helper.database import botdata, find_one, total_user,getid
+from helper.database import Database
 
 from helper.progress import humanbytes
 
