@@ -4,6 +4,8 @@ import asyncio
 from pyrogram import Client
 from aiohttp import web
 from config import Config
+from pyrogram.errors import FloodWait
+
 from plugins.web_support import web_server
 
 # ─── Logging Configuration ─────────────────────────────────────────────────────
