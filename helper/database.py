@@ -11,6 +11,23 @@ class Database:
         self.db = self._client[database_name]
         self.col = self.db["user"]
 
+    def uploadlimit(chat_id, limit):
+    dbcol.update_one({"_id": chat_id}, {"$set": {"uploadlimit": limit}})
+
+
+def addpre(chat_id):
+    date = add_date()
+    dbcol.update_one({"_id": chat_id}, {"$set": {"prexdate": date[0]}})
+
+
+def addpredata(chat_id):
+    dbcol.update_one({"_id": chat_id}, {"$set": {"prexdate": None}})
+
+
+def daily(chat_id, date):
+    dbcol.update_one({"_id": chat_id}, {"$set": {"daily": date}})
+
+
     def new_user(self, user_id: int) -> dict:
         return {
             "_id": user_id,
