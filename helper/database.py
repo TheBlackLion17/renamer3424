@@ -3,6 +3,7 @@ from config import Config
 from .utils import send_log
 from pyrogram import Client
 from pyrogram.types import Message
+from datetime import datetime
 
 
 class Database:
@@ -10,8 +11,6 @@ class Database:
         self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
         self.db = self._client[database_name]
         self.col = self.db["user"]
-
-
 
     def new_user(self, user_id: int) -> dict:
         return {
@@ -21,7 +20,8 @@ class Database:
             "prefix": None,
             "suffix": None,
             "uploadlimit": 2147483648,  # Default 2GB
-            "usertype": "Free"
+            "usertype": "Free",
+            "daily": ""  # for daily tracking
         }
 
     async def uploadlimit(self, user_id: int) -> int:
@@ -37,8 +37,6 @@ class Database:
             {"_id": user_id},
             {"$set": {"usertype": "Premium", "uploadlimit": 4294967296}}  # 4GB
         )
-
-    
 
     async def init_indexes(self):
         try:
@@ -146,12 +144,27 @@ class Database:
             print(f"Error getting suffix: {e}")
             return None
 
-    # 🔒 Premium Upload Limit
-    
+    async def get_daily(self, user_id: int) -> bool:
+        """
+        Check if the user has already claimed daily action today.
+        If not, update the date and return True. If already claimed, return False.
+        """
+        today = datetime.utcnow().date().isoformat()
+
+        user = await self.col.find_one({"_id": user_id})
+        if not user:
+            return False  # User doesn't exist
+
+        last_daily = user.get("daily", "")
+        if last_daily == today:
+            return False  # Already claimed today
+
+        await self.col.update_one({"_id": user_id}, {"$set": {"daily": today}})
+        return True
 
 
-# Initialize
+# Initialize global object
 agsbots = Database(Config.DB_URL, Config.DB_NAME)
 
-# Example async startup call:
+# Example usage:
 # await agsbots.init_indexes()
