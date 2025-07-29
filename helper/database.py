@@ -38,6 +38,13 @@ class Database:
             {"$set": {"usertype": "Premium", "uploadlimit": 4294967296}}  # 4GB
         )
 
+    async def insert(self, user_data: dict) -> None:
+        try:
+            await self.col.insert_one(user_data)
+        except Exception as e:
+            print(f"Error inserting data: {e}")
+
+
     async def init_indexes(self):
         try:
             await self.col.create_index([("_id", 1)], unique=True)
