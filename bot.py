@@ -54,9 +54,21 @@ class Bot(Client):
         await super().stop()
         logger.info("🛑 Bot Stopped")
 
+# ─── Safe Start Function (with FloodWait Handling) ─────────────────────────────
+async def safe_start():
+    bot = Bot()
+    try:
+        await bot.start()
+    except FloodWait as e:
+        logger.warning(f"⚠️ FloodWait: Sleeping for {e.value} seconds...")
+        await asyncio.sleep(e.value)
+        await bot.start()
+    except Exception as err:
+        logger.error(f"❌ Unexpected Error: {err}")
+        raise
+    await idle()
 
 # ─── Entry Point ───────────────────────────────────────────────────────────────
-
 if __name__ == "__main__":
-    bot = Bot()
-    bot.run()
+    from pyrogram.idle import idle
+    asyncio.run(safe_start())
