@@ -16,7 +16,15 @@ from helper.progress import humanbytes
 from helper.set import escape_invalid_curly_brackets
 import os
 
-app = Client("test", api_id=Config.API_ID, api_hash=Config.API_HASH, session_string=Config.STRING, log_channel=Config.LOG_CHANNEL)
+LOG_CHANNEL = Config.LOG_CHANNEL
+# Later in your handlers or messages, use:
+
+
+app = Client("test", 
+             api_id=Config.API_ID, 
+             api_hash=Config.API_HASH, 
+             session_string=Config.STRING
+            )
 
 
 @Client.on_callback_query(filters.regex('cancel'))
